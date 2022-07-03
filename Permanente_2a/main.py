@@ -1,7 +1,7 @@
 from Componentes.miller_rabin import miller_rabin
 from Componentes.generan_prim import generan_prim
 
-def allPrimeNumber():
+def Todos_primos():
     listaNum = [3,4,5]
     for i in listaNum:
         print(f"\nNúmeros primos de {i} digitos:")
@@ -12,7 +12,7 @@ def allPrimeNumber():
             numero += 1
     print("\n")
 
-def randomPrimeNumber():
+def todos_ran_primos():
     source = [ 
         16, 16, 16, 16, 16, 16, 16, 16, 16, 16,
         32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
@@ -24,7 +24,7 @@ def randomPrimeNumber():
         print("{0}bits => {1}".format(i, prime))
 
 def main():
-    allPrimeNumber()
-    randomPrimeNumber()
+    Todos_primos()
+    todos_ran_primos()
 
 main()
