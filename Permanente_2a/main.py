@@ -2,7 +2,7 @@ from Componentes.miller_rabin import miller_rabin
 from Componentes.generan_prim import generan_prim
 
 def Todos_primos():
-    listaNum = [3,4,5]
+    listaNum = [2,6,9]
     for i in listaNum:
         print(f"\nNúmeros primos de {i} digitos:")
         numero = (10**(i-1))
