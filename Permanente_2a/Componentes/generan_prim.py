@@ -9,9 +9,8 @@ def BITS_R(b):
 
     return n
 
-configure_s = 40
-
 def generan_prim(b):
+    configure_s = 40
     s = configure_s
     n = BITS_R(b)
     while (not miller_rabin(n, s)):
