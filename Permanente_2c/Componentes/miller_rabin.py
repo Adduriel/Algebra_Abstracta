@@ -2,7 +2,6 @@ import random
 import math
 from Componentes.POW_MOD import POW_MOD
 from Componentes.comp_rand import comp_rand
-import random
 
 
 def compuesto(a, n, t, u):
@@ -18,7 +17,7 @@ def compuesto(a, n, t, u):
 
     return True
 
-def miller_rabin(n, s):
+def miller_rabin(n, k):
     t = 0
     u = n - 1
     while (u % 2 == 0):
@@ -26,7 +25,7 @@ def miller_rabin(n, s):
         t = t + 1
 
     j = 1
-    while (j < s):
+    while (j < k):
         a = comp_rand(2, n - 1)
         if (compuesto(a, n, t, u)):
             return False
