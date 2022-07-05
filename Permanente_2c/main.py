@@ -44,8 +44,9 @@ def S_1():
 
     m = CIFRA(c, (P[0], P[1]))
 
-    print("e: ", e," , ","n: ", n)
     print("-----------------------EVALUAMOS SIENDO M EL MENSAJE, C EL CIFRADO Y LA P LA CLAVE PÚBLICA----------------------------") 
+    print("e: ", e," , ","n: ", n)
+    print("m: ", m)
     print("P(m) = cx", CIFRA(m,(P[0],P[1])) != CIFRA(c, (P[0], P[1])))
 
 def S_2():
@@ -77,6 +78,9 @@ def S_2():
         cx = CIFRA((a * b) % n, (P[0], P[1]))
 
         print("-----------------------EVALUAMOS SIENDO M EL MENSAJE, C EL CIFRADO Y LA P={e,n} LA CLAVE PÚBLICA----------------------------")
+        print("N: ", n)
+        print("C: ", c)
+        print("cx: ", cx)
         print("cx = c", cx == c)
     else:
         print("Es completamente inútil")
