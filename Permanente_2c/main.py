@@ -26,14 +26,13 @@ def RSA_KEY_GENERATOR(bits):
     return [[e, n],[d, n]]
 
 
-def CIFRA(m, k: tuple):
-    arg1, arg2 = k
-    return expo_m(m, arg1, arg2)
+def CIFRA(m, k):
+    return expo_m(m,k[0], k[1])
 
-def ataque_1():
+def S_1():
     e = 65537
     n = 999630013489
-    P = e, n
+    P = [e, n]
     c = 747120213790
 
     prim, segu = generan_prim_EM(n)
@@ -43,13 +42,13 @@ def ataque_1():
     N = prim * segu
     S = INV(e, N), n
 
-    m = CIFRA(c, S)
+    m = CIFRA(c, (P[0], P[1]))
 
     print("e: ", e," , ","n: ", n)
     print("-----------------------EVALUAMOS SIENDO M EL MENSAJE, C EL CIFRADO Y LA P LA CLAVE PÚBLICA----------------------------") 
-    print("m: ", m,"||", "c", c,"||", "P(m) = cx", CIFRA(m,P) != CIFRA(c,S), "||")
+    print("P(m) = cx", CIFRA(m,(P[0],P[1])) != CIFRA(c, (P[0], P[1])))
 
-def ataque_2():
+def S_2():
     e = 7
     n = 35794234179725868774991807832568455403003778024228226193532908190484670252364677411513516111204504060317568667
     P = [e, n]
@@ -75,14 +74,14 @@ def ataque_2():
         else:
             b = expo_b(c_, y, n)
 
-        cx = CIFRA((a * b) % n, P)
+        cx = CIFRA((a * b) % n, (P[0], P[1]))
 
         print("-----------------------EVALUAMOS SIENDO M EL MENSAJE, C EL CIFRADO Y LA P={e,n} LA CLAVE PÚBLICA----------------------------")
-        print("m: ", (a * b) % n,"||" ,"cx: ","||", cx,"||", "cx = c", cx == c,"||")
+        print("cx = c", cx == c)
     else:
         print("Es completamente inútil")
 
-def ataque_3():
+def S_3():
     k = 32
     P, S = RSA_KEY_GENERATOR(k) 
     M = b'Hello world!'
@@ -92,20 +91,19 @@ def ataque_3():
     m = int(h.hexdigest(), 16)
     m %= P[1]
 
-    firma = CIFRA(m, S)
+    firma = CIFRA(m, (P[0],P[1]))
 
     print("-----------------------HA SIDO GENERADO m A TRAVEZ DE M---------------------")
-
-    print("M:", M,"||","m: ",m,"||","firma: ", firma,"||", "firma = m: ", CIFRA(firma, P) != m , "||")
+    print("m: ", m)
+    print("M: ", M)
+    print("firma: ", firma)
+    print(CIFRA(firma, (P[0],P[1])) != m )
 
 print("-------------EMPEZANDO A EVALUAR LOS ATAQUES-----------------")        
-print("-----------------------Ataque 1----------------------------")
-ataque_1()
+S_1()
 print("\n")
-print("-----------------------Ataque 2----------------------------")
-ataque_2()
+S_2()
 print("\n")
-print("--------------------------------Ataque 3----------------------------")
-ataque_3()
+S_3()
 print("\n")
 print("-----------------------FINALIZA EL ATAQUE----------------------------")
